@@ -4,17 +4,25 @@
 #
 Name     : mvn-orc
 Version  : 1.5.2
-Release  : 1
-URL      : https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.jar
-Source0  : https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.jar
-Source1  : https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.pom
+Release  : 2
+URL      : https://github.com/apache/orc/archive/rel/release-1.5.2.tar.gz
+Source0  : https://github.com/apache/orc/archive/rel/release-1.5.2.tar.gz
+Source1  : https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.jar
+Source2  : https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.pom
+Source3  : https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.jar
+Source4  : https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.pom
+Source5  : https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.jar
+Source6  : https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: mvn-orc-data = %{version}-%{release}
+BuildRequires : buildreq-cmake
 
 %description
-No detailed description available
+These scripts are useful for testing on different versions of Linux
+assuming that you are running a version of Linux that has docker
+available.
 
 %package data
 Summary: data components for the mvn-orc package.
@@ -29,11 +37,23 @@ data components for the mvn-orc package.
 %build
 
 %install
-mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2
-cp %{SOURCE0} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2
+cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2
+cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2
+cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2
+cp %{SOURCE4} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2
-cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2
+cp %{SOURCE5} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2
+cp %{SOURCE6} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2
 
 
 %files
@@ -41,5 +61,9 @@ cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shim
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.jar
+/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.pom
+/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.jar
+/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.pom
 /usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.jar
 /usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.pom
