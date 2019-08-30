@@ -4,22 +4,26 @@
 #
 Name     : mvn-orc
 Version  : 1.5.2
-Release  : 5
+Release  : 6
 URL      : https://github.com/apache/orc/archive/rel/release-1.5.2.tar.gz
 Source0  : https://github.com/apache/orc/archive/rel/release-1.5.2.tar.gz
 Source1  : https://repo.maven.apache.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2-nohive.jar
 Source2  : https://repo.maven.apache.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2-nohive.jar
-Source3  : https://repo.maven.apache.org/maven2/org/apache/orc/orc/1.5.2/orc-1.5.2.pom
-Source4  : https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.jar
-Source5  : https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.pom
-Source6  : https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.jar
-Source7  : https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.pom
-Source8  : https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.jar
-Source9  : https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.pom
+Source3  : https://repo.maven.apache.org/maven2/org/apache/orc/orc/1.4.3/orc-1.4.3.pom
+Source4  : https://repo.maven.apache.org/maven2/org/apache/orc/orc/1.5.2/orc-1.5.2.pom
+Source5  : https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.4.3/orc-core-1.4.3.jar
+Source6  : https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.4.3/orc-core-1.4.3.pom
+Source7  : https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.jar
+Source8  : https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.pom
+Source9  : https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.jar
+Source10  : https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.pom
+Source11  : https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.jar
+Source12  : https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: mvn-orc-data = %{version}-%{release}
+Requires: mvn-orc-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
 
 %description
@@ -35,37 +39,57 @@ Group: Data
 data components for the mvn-orc package.
 
 
+%package license
+Summary: license components for the mvn-orc package.
+Group: Default
+
+%description license
+license components for the mvn-orc package.
+
+
 %prep
+%setup -q -n orc-rel-release-1.5.2
 
 %build
 
 %install
+mkdir -p %{buildroot}/usr/share/package-licenses/mvn-orc
+cp LICENSE %{buildroot}/usr/share/package-licenses/mvn-orc/LICENSE
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2
 cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2-nohive.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2
 cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2-nohive.jar
 
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc/1.4.3
+cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc/1.4.3/orc-1.4.3.pom
+
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc/1.5.2
-cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc/1.5.2/orc-1.5.2.pom
+cp %{SOURCE4} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc/1.5.2/orc-1.5.2.pom
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.4.3
+cp %{SOURCE5} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.4.3/orc-core-1.4.3.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.4.3
+cp %{SOURCE6} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.4.3/orc-core-1.4.3.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2
-cp %{SOURCE4} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.jar
+cp %{SOURCE7} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2
-cp %{SOURCE5} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.pom
+cp %{SOURCE8} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2
-cp %{SOURCE6} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.jar
+cp %{SOURCE9} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2
-cp %{SOURCE7} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.pom
+cp %{SOURCE10} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2
-cp %{SOURCE8} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.jar
+cp %{SOURCE11} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2
-cp %{SOURCE9} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.pom
+cp %{SOURCE12} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.pom
 
 
 %files
@@ -73,6 +97,8 @@ cp %{SOURCE9} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shim
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.4.3/orc-core-1.4.3.jar
+/usr/share/java/.m2/repository/org/apache/orc/orc-core/1.4.3/orc-core-1.4.3.pom
 /usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2-nohive.jar
 /usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.jar
 /usr/share/java/.m2/repository/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2.pom
@@ -81,4 +107,9 @@ cp %{SOURCE9} %{buildroot}/usr/share/java/.m2/repository/org/apache/orc/orc-shim
 /usr/share/java/.m2/repository/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2.pom
 /usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.jar
 /usr/share/java/.m2/repository/org/apache/orc/orc-shims/1.5.2/orc-shims-1.5.2.pom
+/usr/share/java/.m2/repository/org/apache/orc/orc/1.4.3/orc-1.4.3.pom
 /usr/share/java/.m2/repository/org/apache/orc/orc/1.5.2/orc-1.5.2.pom
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mvn-orc/LICENSE
