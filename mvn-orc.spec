@@ -4,7 +4,7 @@
 #
 Name     : mvn-orc
 Version  : 1.5.2
-Release  : 6
+Release  : 7
 URL      : https://github.com/apache/orc/archive/rel/release-1.5.2.tar.gz
 Source0  : https://github.com/apache/orc/archive/rel/release-1.5.2.tar.gz
 Source1  : https://repo.maven.apache.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2-nohive.jar
